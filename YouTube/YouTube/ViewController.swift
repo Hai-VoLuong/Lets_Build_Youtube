@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LBTAComponents
 
 class HomeController: UICollectionViewController {
 
@@ -25,6 +26,11 @@ class HomeController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
 }
 
 extension HomeController: UICollectionViewDelegateFlowLayout {
@@ -44,12 +50,53 @@ class VideoCell: UICollectionViewCell {
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .blue
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
+    let userProfileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .green
+        return imageView
+    }()
+    
+    let separatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .purple
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .red
+        return label
+    }()
+    
     func setupViews() {
+        
         addSubview(thumbnailImageView)
-        thumbnailImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        addSubview(separatorView)
+        addSubview(userProfileImageView)
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
+        
+        thumbnailImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: userProfileImageView.topAnchor, right: self.rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 4, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
+        separatorView.anchor(nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
+        
+        userProfileImageView.anchor(thumbnailImageView.bottomAnchor, left: self.leftAnchor, bottom: separatorView.topAnchor, right: nil, topConstant: 0, leftConstant: 10, bottomConstant: 10, rightConstant: 10, widthConstant: 44, heightConstant: 44)
+        
+        titleLabel.anchor(thumbnailImageView.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: nil, right: self.rightAnchor, topConstant: 4, leftConstant: 4, bottomConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 20)
+        
+        descriptionLabel.anchor(titleLabel.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: separatorView.topAnchor, right: self.rightAnchor, topConstant: 5, leftConstant: 4, bottomConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
