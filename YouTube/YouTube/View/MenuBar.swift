@@ -27,8 +27,11 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: "Cell")
         addSubview(collectionView)
-        addConstraintsWithFormat("H:|[v0]|", views: collectionView)
-        addConstraintsWithFormat("V:|[v0]|", views: collectionView)
+        
+//        addConstraintsWithFormat("H:|[v0]|", views: collectionView)
+//        addConstraintsWithFormat("V:|[v0]|", views: collectionView)
+        
+        collectionView.anchor(self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         let selectedIndexPath = IndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .bottom)
@@ -85,11 +88,14 @@ class MenuCell: BaseCell {
     override func setupViews() {
         super.setupViews()
         addSubview(imageView)
-        addConstraintsWithFormat("H:[v0(28)]", views: imageView)
-        addConstraintsWithFormat("V:[v0(28)]", views: imageView)
+        
+//        addConstraintsWithFormat("H:[v0(28)]", views: imageView)
+//        addConstraintsWithFormat("V:[v0(28)]", views: imageView)
+        
+        imageView.anchor(nil, left: nil, bottom: nil, right: nil, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 28, heightConstant: 28)
         
         addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        
+
         addConstraint(NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
     }
     

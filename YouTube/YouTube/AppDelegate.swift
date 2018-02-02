@@ -35,9 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         statusBarBackgroundView.backgroundColor = UIColor(r: 194, g: 31, b: 31)
         
         window?.addSubview(statusBarBackgroundView)
-        window?.addConstraintsWithFormat("H:|[v0]|", views: statusBarBackgroundView)
-        window?.addConstraintsWithFormat("V:|[v0(20)]|", views: statusBarBackgroundView)
-//        statusBarBackgroundView.anchor(window?.topAnchor, left: window?.leftAnchor, bottom: nil, right: window?.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
+        
+//        window?.addConstraintsWithFormat("H:|[v0]|", views: statusBarBackgroundView)
+//        window?.addConstraintsWithFormat("V:|[v0(20)]|", views: statusBarBackgroundView)
+        
+        statusBarBackgroundView.anchor(window?.topAnchor, left: window?.leftAnchor, bottom: nil, right: window?.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
         return true
     }
