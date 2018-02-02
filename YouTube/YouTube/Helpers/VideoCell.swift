@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LBTAComponents
 
 class VideoCell: UICollectionViewCell {
     
