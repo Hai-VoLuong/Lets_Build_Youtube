@@ -12,13 +12,22 @@ import LBTAComponents
 class HomeController: UICollectionViewController {
     
     var videos: [Video] = {
+        
+        var kanyelChannel = Channel()
+        kanyelChannel.name = "KanyeIsTheBestChannel"
+        kanyelChannel.profileImageName = "kanye_profile"
+        
         var blankSpaceVideo = Video()
         blankSpaceVideo.title = "Taylor Swift - Blnk Space"
         blankSpaceVideo.thumbnailImageName = "taylon_swift_blank"
+        blankSpaceVideo.channel = kanyelChannel
+        blankSpaceVideo.numberOfViews = 339535464
         
         var badBloodVideo = Video()
         badBloodVideo.title = "Taylor Swift - Bad blood featuring Kendrick Lamar"
         badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
+        badBloodVideo.channel = kanyelChannel
+        badBloodVideo.numberOfViews = 3532522525
         
         return [blankSpaceVideo, badBloodVideo]
     }()
@@ -47,7 +56,7 @@ class HomeController: UICollectionViewController {
     func setupNavBarButtons() {
         let searchBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "search").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handlerSearch))
 
-        let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handlerSearch))
+        let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handlerMore))
         
         
         navigationItem.rightBarButtonItems = [moreBarButtonItem,searchBarButtonItem]
@@ -55,6 +64,8 @@ class HomeController: UICollectionViewController {
     
     @objc func handlerSearch() {
     }
+    
+    @objc func handlerMore() {}
     
     let menuBar: MenuBar = {
         let mb = MenuBar()
