@@ -25,11 +25,19 @@ class BaseCell: UICollectionViewCell {
 
 class VideoCell: BaseCell {
     
+    var video: Video? {
+        didSet {
+            titleLabel.text = video?.title
+            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
+    // MARK: - thumbnailImageView
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "taylon_swift_blank")
@@ -40,6 +48,7 @@ class VideoCell: BaseCell {
         return imageView
     }()
     
+    // MARK: - userProfileImageView
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "taylon_swift_profile")
@@ -51,12 +60,14 @@ class VideoCell: BaseCell {
         return imageView
     }()
     
+    // MARK: - separatorView
     let separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(r: 230, g: 230, b: 230)
         return view
     }()
     
+    // MARK: - titleLabel
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +75,7 @@ class VideoCell: BaseCell {
         return label
     }()
     
+    // MARK: - subtitleLabel
     let subtitleLabel: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false

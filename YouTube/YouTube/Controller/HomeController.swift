@@ -10,6 +10,18 @@ import UIKit
 import LBTAComponents
 
 class HomeController: UICollectionViewController {
+    
+    var videos: [Video] = {
+        var blankSpaceVideo = Video()
+        blankSpaceVideo.title = "Taylor Swift - Blnk Space"
+        blankSpaceVideo.thumbnailImageName = "taylon_swift_blank"
+        
+        var badBloodVideo = Video()
+        badBloodVideo.title = "Taylor Swift - Bad blood featuring Kendrick Lamar"
+        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
+        
+        return [blankSpaceVideo, badBloodVideo]
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +45,15 @@ class HomeController: UICollectionViewController {
     }
     
     func setupNavBarButtons() {
+        let searchBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "search").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handlerSearch))
+
+        let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handlerSearch))
         
+        
+        navigationItem.rightBarButtonItems = [moreBarButtonItem,searchBarButtonItem]
+    }
+    
+    @objc func handlerSearch() {
     }
     
     let menuBar: MenuBar = {
@@ -43,18 +63,20 @@ class HomeController: UICollectionViewController {
     
     private func setupMenuBar() {
         view.addSubview(menuBar)
-        view.addConstraintsWithFormat("H:|[v0]|", views: menuBar)
-        view.addConstraintsWithFormat("V:|[v0(50)]|", views: menuBar)
+ 
+         menuBar.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
         
-//         menuBar.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        //       view.addConstraintsWithFormat("H:|[v0]|", views: menuBar)
+        //       view.addConstraintsWithFormat("V:|[v0(50)]|", views: menuBar)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return videos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! VideoCell
+        cell.video = videos[indexPath.row]
         return cell
     }
     
