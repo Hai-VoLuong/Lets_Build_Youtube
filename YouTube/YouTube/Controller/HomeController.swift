@@ -41,8 +41,14 @@ class HomeController: UICollectionViewController {
                 return
             }
             
-            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print(str)
+            do {
+             let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                
+                print(json)
+                
+            } catch let jsonError {
+                print(jsonError)
+            }
             
         }.resume()
     }
