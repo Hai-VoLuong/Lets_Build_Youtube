@@ -31,9 +31,27 @@ class HomeController: UICollectionViewController {
         
         return [blankSpaceVideo, badBloodVideo]
     }()
+    
+    func fetVideos() {
+        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+         
+            if error != nil {
+                print(error)
+                return
+            }
+            
+            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print(str)
+            
+        }.resume()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetVideos()
+        
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
     
