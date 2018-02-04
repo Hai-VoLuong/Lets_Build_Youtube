@@ -25,11 +25,32 @@ class BaseCell: UICollectionViewCell {
 
 class VideoCell: BaseCell {
     
+    var video: Video? {
+        didSet {
+            titleLabel.text = video?.title
+            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
+            
+            if let profileImageName = video?.channel?.profileImageName {
+                userProfileImageView.image = UIImage(named: profileImageName)
+            }
+            
+            if let channelName = video?.channel?.name,let numberOfViews = video?.numberOfViews {
+                
+                let numberFormatter = NumberFormatter()
+                numberFormatter.numberStyle = .decimal
+                
+                let subtitleText = "\(channelName) - \(numberFormatter.string(from: numberOfViews)!) - 2 years ago"
+                subtitleTextView.text = subtitleText
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
+    // MARK: - thumbnailImageView
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "taylon_swift_blank")
@@ -40,6 +61,7 @@ class VideoCell: BaseCell {
         return imageView
     }()
     
+    // MARK: - userProfileImageView
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "taylon_swift_profile")
@@ -51,20 +73,24 @@ class VideoCell: BaseCell {
         return imageView
     }()
     
+    // MARK: - separatorView
     let separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(r: 230, g: 230, b: 230)
         return view
     }()
     
+    // MARK: - titleLabel
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Tay lor Swift - Blank Space"
+        label.numberOfLines = 2
         return label
     }()
     
-    let subtitleLabel: UITextView = {
+    // MARK: - subtitleLabel
+    let subtitleTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = "TaylorSwiftVEVO - 1,604,604,607 views - 2 year ago ago ago ago"
@@ -81,7 +107,7 @@ class VideoCell: BaseCell {
         addSubview(separatorView)
         addSubview(userProfileImageView)
         addSubview(titleLabel)
-        addSubview(subtitleLabel)
+        addSubview(subtitleTextView)
         
         thumbnailImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: userProfileImageView.topAnchor, right: self.rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
@@ -91,7 +117,7 @@ class VideoCell: BaseCell {
         
         titleLabel.anchor(thumbnailImageView.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: nil, right: self.rightAnchor, topConstant: 8, leftConstant: 4, bottomConstant: 2, rightConstant: 10, widthConstant: 0, heightConstant: 15)
         
-        subtitleLabel.anchor(titleLabel.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: separatorView.topAnchor, right: self.rightAnchor, topConstant: 2, leftConstant: 4, bottomConstant: 8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        subtitleTextView.anchor(titleLabel.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: separatorView.topAnchor, right: self.rightAnchor, topConstant: 2, leftConstant: 4, bottomConstant: 8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
     }
     
