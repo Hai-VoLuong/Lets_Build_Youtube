@@ -28,7 +28,7 @@ class VideoCell: BaseCell {
     var video: Video? {
         didSet {
             titleLabel.text = video?.title
-            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
+            setThumbnailImage()
             
             if let profileImageName = video?.channel?.profileImageName {
                 userProfileImageView.image = UIImage(named: profileImageName)
@@ -42,6 +42,12 @@ class VideoCell: BaseCell {
                 let subtitleText = "\(channelName) - \(numberFormatter.string(from: numberOfViews)!) - 2 years ago"
                 subtitleTextView.text = subtitleText
             }
+        }
+    }
+    
+    func setThumbnailImage() {
+        if let thumbnailImageUrl = video?.thumbnailImageName {
+            print(thumbnailImageUrl)
         }
     }
     
