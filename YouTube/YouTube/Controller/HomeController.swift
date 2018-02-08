@@ -8,10 +8,13 @@
 
 import UIKit
 import LBTAComponents
+import RxSwift
+import RxCocoa
 
 class HomeController: UICollectionViewController {
     
     var videos: [Video]?
+    let bag = DisposeBag()
     
     func fetVideos() {
         let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
@@ -79,18 +82,18 @@ class HomeController: UICollectionViewController {
     }
     
     func setupNavBarButtons() {
-        let searchBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "search").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handlerSearch))
+        let searchBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "search").withRenderingMode(.alwaysOriginal), style: .plain, target: nil, action: nil)
 
-        let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handlerMore))
+        let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), style: .plain, target: nil, action: nil)
         
+        let settingLauncher = SettingsLauncher()
+        moreBarButtonItem.rx.tap.asObservable()
+            .subscribe(onNext: {
+                settingLauncher.showSettings()
+            }).disposed(by: bag)
         
         navigationItem.rightBarButtonItems = [moreBarButtonItem,searchBarButtonItem]
     }
-    
-    @objc func handlerSearch() {
-    }
-    
-    @objc func handlerMore() {}
     
     let menuBar: MenuBar = {
         let mb = MenuBar()

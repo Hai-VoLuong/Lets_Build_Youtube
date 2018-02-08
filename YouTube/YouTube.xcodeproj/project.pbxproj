@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		045A1C3A202C95B9002F2D6D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1C39202C95B9002F2D6D /* Extensions.swift */; };
+		045A1C3C202CB2D6002F2D6D /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */; };
 		0462EDBF201F7C6C000AFB15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0462EDBE201F7C6C000AFB15 /* AppDelegate.swift */; };
 		0462EDC1201F7C6C000AFB15 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0462EDC0201F7C6C000AFB15 /* HomeController.swift */; };
 		0462EDC4201F7C6C000AFB15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0462EDC2201F7C6C000AFB15 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		041FAE1B48E791F498E36857 /* Pods-YouTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.release.xcconfig"; sourceTree = "<group>"; };
 		045A1C39202C95B9002F2D6D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		0462EDBB201F7C6C000AFB15 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0462EDBE201F7C6C000AFB15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0462EDC0201F7C6C000AFB15 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				0462EDC0201F7C6C000AFB15 /* HomeController.swift */,
+				045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0462EDC1201F7C6C000AFB15 /* HomeController.swift in Sources */,
+				045A1C3C202CB2D6002F2D6D /* SettingsLauncher.swift in Sources */,
 				045A1C3A202C95B9002F2D6D /* Extensions.swift in Sources */,
 				0462EDBF201F7C6C000AFB15 /* AppDelegate.swift in Sources */,
 				04EF7E722023E2E00073D14B /* MenuBar.swift in Sources */,
