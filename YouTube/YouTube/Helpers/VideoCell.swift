@@ -28,11 +28,8 @@ class VideoCell: BaseCell {
     var video: Video? {
         didSet {
             titleLabel.text = video?.title
-            thumbnailImageView.image = UIImage(named: (video?.thumbnailImageName)!)
-            
-            if let profileImageName = video?.channel?.profileImageName {
-                userProfileImageView.image = UIImage(named: profileImageName)
-            }
+            setThumbnailImage()
+            setupProfileImage()
             
             if let channelName = video?.channel?.name,let numberOfViews = video?.numberOfViews {
                 
@@ -42,6 +39,18 @@ class VideoCell: BaseCell {
                 let subtitleText = "\(channelName) - \(numberFormatter.string(from: numberOfViews)!) - 2 years ago"
                 subtitleTextView.text = subtitleText
             }
+        }
+    }
+    
+    func setupProfileImage() {
+        if let profileImageUrl = video?.channel?.profileImageName {
+            userProfileImageView.loadImageUsingURLString(urlString: profileImageUrl)
+        }
+    }
+    
+    func setThumbnailImage() {
+        if let thumbnailImageUrl = video?.thumbnailImageName {
+            thumbnailImageView.loadImageUsingURLString(urlString: thumbnailImageUrl)
         }
     }
     
@@ -64,6 +73,7 @@ class VideoCell: BaseCell {
     // MARK: - userProfileImageView
     let userProfileImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.image = #imageLiteral(resourceName: "taylon_swift_profile")
         
         // vong tron
