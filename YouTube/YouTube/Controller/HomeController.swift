@@ -23,19 +23,27 @@ class HomeController: UICollectionViewController {
             }
             do {
              let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                
-                print(json)
-                
+                // 27 phut
                 this.videos = [Video]()
                 
                 for dictinary in (json as! [[String: AnyObject]]) {
                     let video = Video()
                     video.title = dictinary["title"] as? String
                     video.thumbnailImageName = dictinary["thumbnail_image_name"] as? String
+                    
+                    let channelDictionary = dictinary["channel"] as? [String: AnyObject]
+                    
+                    let channel = Channel()
+                    channel.name = channelDictionary!["name"] as? String
+                    channel.profileImageName = channelDictionary!["profile_image_name"] as?
+                        String
+                    
+                    video.channel = channel
+                    
                     this.videos?.append(video)
                 }
                 
-                //this.collectionView?.reloadData()
+               //this.collectionView?.reloadData()
                 
             } catch let jsonError {
                 print(jsonError)
