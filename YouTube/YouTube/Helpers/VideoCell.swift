@@ -60,8 +60,8 @@ class VideoCell: BaseCell {
     }
     
     // MARK: - thumbnailImageView
-    let thumbnailImageView: UIImageView = {
-        let imageView = UIImageView()
+    let thumbnailImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.image = #imageLiteral(resourceName: "taylon_swift_blank")
         
         // scale image cho vua
@@ -71,8 +71,8 @@ class VideoCell: BaseCell {
     }()
     
     // MARK: - userProfileImageView
-    let userProfileImageView: UIImageView = {
-        let imageView = UIImageView()
+    let userProfileImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.image = #imageLiteral(resourceName: "taylon_swift_profile")
         
