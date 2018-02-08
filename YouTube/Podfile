@@ -7,4 +7,6 @@ target 'YouTube' do
 
   # Pods for YouTube
   pod 'LBTAComponents', '~> 1.0'
+  pod 'RxSwift', '~> 4.1'
+  pod 'RxCocoa', '~> 4.1'
 end
