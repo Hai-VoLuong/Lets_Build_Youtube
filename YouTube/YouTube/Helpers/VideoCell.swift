@@ -9,20 +9,6 @@
 import UIKit
 import LBTAComponents
 
-class BaseCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    func setupViews() {}
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-}
-
 class VideoCell: BaseCell {
     
     var video: Video? {
@@ -57,6 +43,10 @@ class VideoCell: BaseCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - thumbnailImageView
@@ -129,9 +119,5 @@ class VideoCell: BaseCell {
         
         subtitleTextView.anchor(titleLabel.bottomAnchor, left: userProfileImageView.rightAnchor, bottom: separatorView.topAnchor, right: self.rightAnchor, topConstant: 2, leftConstant: 4, bottomConstant: 8, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

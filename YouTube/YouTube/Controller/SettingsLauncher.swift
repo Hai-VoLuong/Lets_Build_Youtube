@@ -10,8 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class SettingsLauncher {
+final class SettingsLauncher: NSObject {
     
+    // MARK: - Properties
     private let bag = DisposeBag()
     private let blackView = UIView()
     private let collectionView: UICollectionView = {
@@ -21,6 +22,7 @@ final class SettingsLauncher {
         return cv
     }()
 
+    // MARK: - Public Func
     func showSettings() {
        
         handleDismiss()
@@ -44,6 +46,7 @@ final class SettingsLauncher {
         }
     }
     
+    // MARK: Private Func
     private func handleDismiss() {
         let tapGesture = UITapGestureRecognizer()
         blackView.addGestureRecognizer(tapGesture)
@@ -61,7 +64,48 @@ final class SettingsLauncher {
         }).disposed(by: bag)
     }
     
-    init() {
-        
+    override init() {
+        super.init()
+        collectionView.register(SettingCell.self, forCellWithReuseIdentifier: "Cell")
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
 }
+
+extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
