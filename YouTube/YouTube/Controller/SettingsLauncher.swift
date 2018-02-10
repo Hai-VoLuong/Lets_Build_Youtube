@@ -10,16 +10,38 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+class Setting {
+    
+    let name: String
+    let imageName: String
+    
+    init(name: String, imageName: String) {
+        self.name = name
+        self.imageName = imageName
+    }
+}
+
 final class SettingsLauncher: NSObject {
     
     // MARK: - Properties
     private let bag = DisposeBag()
     private let blackView = UIView()
+    fileprivate let cellHeight: CGFloat = 50
+    
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = .white
         return cv
+    }()
+    
+    let settings: [Setting] = {
+        return [Setting(name: "Setting", imageName: "settings"),
+                Setting(name: "Term & privacy policy", imageName: "privacy"),
+                Setting(name: "Send Feedback", imageName: "feedback"),
+                Setting(name: "Help", imageName: "help"),
+                Setting(name: "Switch Account", imageName: "switchaccount"),
+                Setting(name: "Cancel", imageName: "cancel")]
     }()
 
     // MARK: - Public Func
@@ -31,7 +53,7 @@ final class SettingsLauncher: NSObject {
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             window.addSubview(blackView)
             window.addSubview(collectionView)
-            let height: CGFloat = 200
+            let height: CGFloat = CGFloat(settings.count) * cellHeight + cellHeight
             let y = window.frame.height - height
             collectionView.frame = CGRect(x: 0, y: window.frame.height, width: window.frame.width, height: height)
             
@@ -75,17 +97,17 @@ final class SettingsLauncher: NSObject {
 extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return settings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! SettingCell
+        cell.setting = settings[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        return CGSize(width: collectionView.frame.width, height: cellHeight)
     }
 }
 

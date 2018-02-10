@@ -11,9 +11,19 @@ import LBTAComponents
 
 final class SettingCell: BaseCell {
     
+    var setting: Setting? {
+        didSet {
+            if let setting = setting {
+                nameLabel.text = setting.name
+                iconImageView.image = UIImage(named: setting.imageName)
+            }
+        }
+    }
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Setting"
+        label.font = UIFont.systemFont(ofSize: 13)
         return label
     }()
     
