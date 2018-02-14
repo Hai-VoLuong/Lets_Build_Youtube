@@ -1,12 +1,19 @@
 PODS:
   - LBTAComponents (1.0.2)
+  - RxCocoa (4.1.1):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.1)
 
 DEPENDENCIES:
   - LBTAComponents (~> 1.0)
+  - RxCocoa (~> 4.1)
+  - RxSwift (~> 4.1)
 
 SPEC CHECKSUMS:
   LBTAComponents: c4c8863e0ef6715e378300db148b96a09df656f7
+  RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
+  RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
 
-PODFILE CHECKSUM: 03621a004dce73ce0db30c00ae43972575cf4509
+PODFILE CHECKSUM: 03d6d7e5a06775ff212abf68a903ba18bfcbbd6d
 
 COCOAPODS: 1.4.0
