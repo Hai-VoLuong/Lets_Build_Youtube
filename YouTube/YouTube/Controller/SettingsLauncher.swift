@@ -10,17 +10,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class Setting {
-    
-    let name: String
-    let imageName: String
-    
-    init(name: String, imageName: String) {
-        self.name = name
-        self.imageName = imageName
-    }
-}
-
 final class SettingsLauncher: NSObject {
     
     // MARK: - Properties
@@ -46,9 +35,7 @@ final class SettingsLauncher: NSObject {
 
     // MARK: - Public Func
     func showSettings() {
-       
         handleDismiss()
-        
         if let window = UIApplication.shared.keyWindow {
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             window.addSubview(blackView)
