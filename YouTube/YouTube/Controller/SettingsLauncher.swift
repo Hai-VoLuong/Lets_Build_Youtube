@@ -32,6 +32,8 @@ final class SettingsLauncher: NSObject {
                 Setting(name: "Switch Account", imageName: "switchaccount"),
                 Setting(name: "Cancel", imageName: "cancel")]
     }()
+    
+    var homeController: HomeController?
 
     // MARK: - Public Func
     func showSettings() {
@@ -95,6 +97,22 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { [weak self] in
+            guard let this = self else { return }
+            this.blackView.alpha = 0
+            if let window = UIApplication.shared.keyWindow {
+                this.collectionView.frame = CGRect(x: 0,y: window.frame.height,
+                    width: (this.collectionView.frame.width),
+                    height: (this.collectionView.frame.height))
+            }
+        }) { [weak self] (completed: Bool) in
+            guard let this = self else { return }
+            this.homeController?.showControllerForSetting()
+        }
     }
 }
 

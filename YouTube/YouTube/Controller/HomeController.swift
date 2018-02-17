@@ -88,11 +88,18 @@ class HomeController: UICollectionViewController {
         
         let settingLauncher = SettingsLauncher()
         moreBarButtonItem.rx.tap.asObservable()
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                settingLauncher.homeController = self
                 settingLauncher.showSettings()
+                
             }).disposed(by: bag)
         
         navigationItem.rightBarButtonItems = [moreBarButtonItem,searchBarButtonItem]
+    }
+    
+    func showControllerForSetting() {
+        let dummySettingViewController = UIViewController()
+        navigationController?.pushViewController(dummySettingViewController, animated: true)
     }
     
     let menuBar: MenuBar = {
