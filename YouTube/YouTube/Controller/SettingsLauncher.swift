@@ -111,7 +111,10 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
             }
         }) { [weak self] (completed: Bool) in
             guard let this = self else { return }
-            this.homeController?.showControllerForSetting()
+            let setting = this.settings[indexPath.item]
+            if setting.name != "Cancel" {
+                    this.homeController?.showControllerForSetting(setting: setting)
+            }
         }
     }
 }
