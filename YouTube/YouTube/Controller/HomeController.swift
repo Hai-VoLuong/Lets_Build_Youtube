@@ -11,52 +11,24 @@ import LBTAComponents
 import RxSwift
 import RxCocoa
 
-class HomeController: UICollectionViewController {
+final class HomeController: UICollectionViewController {
     
-    var videos: [Video]?
-    let bag = DisposeBag()
+    // MARK: - Private Properties
+    private var videos: [Video]?
+    private let bag = DisposeBag()
     
-    func fetVideos() {
-        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
-        URLSession.shared.dataTask(with: url!) { [weak self] (data, response, error) in
-            guard let this = self else { return }
-            if error != nil {
-                print(error ?? "")
-                return
-            }
-            do {
-             let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                // 27 phut
-                this.videos = [Video]()
-                
-                for dictinary in (json as! [[String: AnyObject]]) {
-                    let video = Video()
-                    video.title = dictinary["title"] as? String
-                    video.thumbnailImageName = dictinary["thumbnail_image_name"] as? String
-                    
-                    let channelDictionary = dictinary["channel"] as? [String: AnyObject]
-                    
-                    let channel = Channel()
-                    channel.name = channelDictionary!["name"] as? String
-                    channel.profileImageName = channelDictionary!["profile_image_name"] as?
-                        String
-                    
-                    video.channel = channel
-                    
-                    this.videos?.append(video)
-                }
-                DispatchQueue.main.async {
-                    this.collectionView?.reloadData()
-                }
-               
-                
-            } catch let jsonError {
-                print(jsonError)
-            }
-            
-        }.resume()
-    }
-
+    lazy private var settingLauncher: SettingsLauncher = {
+        let laucher = SettingsLauncher()
+        laucher.homeController = self
+        return laucher
+    }()
+    
+    private let menuBar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,39 +53,71 @@ class HomeController: UICollectionViewController {
         setupNavBarButtons()
     }
     
-    func setupNavBarButtons() {
+    // MARK: - Private Func
+    private func fetVideos() {
+        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
+        URLSession.shared.dataTask(with: url!) { [weak self] (data, response, error) in
+            guard let this = self else { return }
+            if error != nil {
+                print(error ?? "")
+                return
+            }
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                // 27 phut
+                this.videos = [Video]()
+                
+                for dictinary in (json as! [[String: AnyObject]]) {
+                    let video = Video()
+                    video.title = dictinary["title"] as? String
+                    video.thumbnailImageName = dictinary["thumbnail_image_name"] as? String
+                    
+                    let channelDictionary = dictinary["channel"] as? [String: AnyObject]
+                    
+                    let channel = Channel()
+                    channel.name = channelDictionary!["name"] as? String
+                    channel.profileImageName = channelDictionary!["profile_image_name"] as?
+                    String
+                    
+                    video.channel = channel
+                    
+                    this.videos?.append(video)
+                }
+                DispatchQueue.main.async {
+                    this.collectionView?.reloadData()
+                }
+                
+                
+            } catch let jsonError {
+                print(jsonError)
+            }
+            
+            }.resume()
+    }
+    
+    private func setupNavBarButtons() {
         let searchBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "search").withRenderingMode(.alwaysOriginal), style: .plain, target: nil, action: nil)
 
         let moreBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), style: .plain, target: nil, action: nil)
         
-        let settingLauncher = SettingsLauncher()
         moreBarButtonItem.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] in
-                settingLauncher.homeController = self
-                settingLauncher.showSettings()
-                
+                guard let this = self else { return }
+                this.settingLauncher.showSettings()
             }).disposed(by: bag)
         
         navigationItem.rightBarButtonItems = [moreBarButtonItem,searchBarButtonItem]
     }
     
+    private func setupMenuBar() {
+        view.addSubview(menuBar)
+        menuBar.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+    }
+    
+    // MARK: - Public Func
     func showControllerForSetting() {
         let dummySettingViewController = UIViewController()
         navigationController?.pushViewController(dummySettingViewController, animated: true)
-    }
-    
-    let menuBar: MenuBar = {
-        let mb = MenuBar()
-        return mb
-    }()
-    
-    private func setupMenuBar() {
-        view.addSubview(menuBar)
- 
-         menuBar.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
-        
-        //       view.addConstraintsWithFormat("H:|[v0]|", views: menuBar)
-        //       view.addConstraintsWithFormat("V:|[v0(50)]|", views: menuBar)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -133,7 +137,6 @@ class HomeController: UICollectionViewController {
 }
 
 extension HomeController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = (view.frame.width - 16 - 16) * 9 / 16
         return CGSize(width: view.frame.width, height: height + 16 + 60)
