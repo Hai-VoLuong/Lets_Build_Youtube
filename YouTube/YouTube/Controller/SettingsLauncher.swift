@@ -25,12 +25,13 @@ final class SettingsLauncher: NSObject {
     }()
     
     let settings: [Setting] = {
-        return [Setting(name: "Setting", imageName: "settings"),
-                Setting(name: "Term & privacy policy", imageName: "privacy"),
-                Setting(name: "Send Feedback", imageName: "feedback"),
-                Setting(name: "Help", imageName: "help"),
-                Setting(name: "Switch Account", imageName: "switchaccount"),
-                Setting(name: "Cancel", imageName: "cancel")]
+        let cancelSetting = Setting(name: .Cancel, imageName: "cancel")
+        return [Setting(name: .Settings, imageName: "settings"),
+                Setting(name: .TermPrivacy, imageName: "privacy"),
+                Setting(name: .SendFeedback, imageName: "feedback"),
+                Setting(name: .Help, imageName: "help"),
+                Setting(name: .SwithAccount, imageName: "switchaccount"),
+                cancelSetting]
     }()
     
     var homeController: HomeController?
@@ -112,7 +113,7 @@ extension SettingsLauncher: UICollectionViewDataSource, UICollectionViewDelegate
         }) { [weak self] (completed: Bool) in
             guard let this = self else { return }
             let setting = this.settings[indexPath.item]
-            if setting.name != "Cancel" {
+            if setting.name != .Cancel {
                     this.homeController?.showControllerForSetting(setting: setting)
             }
         }
