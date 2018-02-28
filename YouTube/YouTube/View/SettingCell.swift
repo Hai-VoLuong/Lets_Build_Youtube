@@ -11,13 +11,22 @@ import LBTAComponents
 
 class Setting {
     
-    let name: String
+    let name: SettingName
     let imageName: String
     
-    init(name: String, imageName: String) {
+    init(name: SettingName, imageName: String) {
         self.name = name
         self.imageName = imageName
     }
+}
+
+enum SettingName: String {
+    case Cancel = "Cancel & Dismiss"
+    case Settings = "Settings"
+    case TermPrivacy = "Term & privacy policy"
+    case SendFeedback = "Send Feedback"
+    case Help = "Help"
+    case SwithAccount = "Switch Account"
 }
 
 final class SettingCell: BaseCell {
@@ -33,7 +42,7 @@ final class SettingCell: BaseCell {
     var setting: Setting? {
         didSet {
             if let setting = setting {
-                nameLabel.text = setting.name
+                nameLabel.text = setting.name.rawValue
                 iconImageView.image = UIImage(named: setting.imageName)?.withRenderingMode(.alwaysTemplate)
                 iconImageView.tintColor = .darkGray
             }

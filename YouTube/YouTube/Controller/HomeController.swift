@@ -117,7 +117,7 @@ final class HomeController: UICollectionViewController {
     // MARK: - Public Func
     func showControllerForSetting(setting: Setting) {
         let dummySettingViewController = UIViewController()
-        dummySettingViewController.navigationItem.title = setting.name
+        dummySettingViewController.navigationItem.title = setting.name.rawValue
         dummySettingViewController.view.backgroundColor = .white
         
         navigationController?.navigationBar.tintColor = .white
