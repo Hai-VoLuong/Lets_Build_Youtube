@@ -54,44 +54,10 @@ final class HomeController: UICollectionViewController {
     
     // MARK: - Private Func
     private func fetVideos() {
-        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
-        URLSession.shared.dataTask(with: url!) { [weak self] (data, response, error) in
-            guard let this = self else { return }
-            if error != nil {
-                print(error ?? "")
-                return
-            }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                // 27 phut
-                this.videos = [Video]()
-                
-                for dictinary in (json as! [[String: AnyObject]]) {
-                    let video = Video()
-                    video.title = dictinary["title"] as? String
-                    video.thumbnailImageName = dictinary["thumbnail_image_name"] as? String
-                    
-                    let channelDictionary = dictinary["channel"] as? [String: AnyObject]
-                    
-                    let channel = Channel()
-                    channel.name = channelDictionary!["name"] as? String
-                    channel.profileImageName = channelDictionary!["profile_image_name"] as?
-                    String
-                    
-                    video.channel = channel
-                    
-                    this.videos?.append(video)
-                }
-                DispatchQueue.main.async {
-                    this.collectionView?.reloadData()
-                }
-                
-                
-            } catch let jsonError {
-                print(jsonError)
-            }
-            
-            }.resume()
+        ApiService.sharedInstance.fetchVideos { (videos) in
+            self.videos = videos
+            self.collectionView?.reloadData()
+        }
     }
     
     private func setupNavBarButtons() {
