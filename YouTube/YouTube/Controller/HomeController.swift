@@ -34,7 +34,6 @@ final class HomeController: UICollectionViewController {
         
         fetVideos()
         
-        navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
     
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32 , height: view.frame.height))
@@ -110,8 +109,19 @@ final class HomeController: UICollectionViewController {
     }
     
     private func setupMenuBar() {
+        navigationController?.hidesBarsOnSwipe = true
+    
+        let redView = UIView()
+        redView.backgroundColor = UIColor(r: 230, g: 32, b: 31)
+        view.addSubview(redView)
+        view.addConstraintsWithFormat("H:|[v0]|", views: redView)
+        view.addConstraintsWithFormat("V:[v0(50)]", views: redView)
+        
         view.addSubview(menuBar)
-        menuBar.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 50)
+        view.addConstraintsWithFormat("H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat("V:[v0(50)]", views: menuBar)
+        
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
     // MARK: - Public Func
