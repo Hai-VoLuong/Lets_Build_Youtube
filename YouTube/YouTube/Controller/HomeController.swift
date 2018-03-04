@@ -14,7 +14,6 @@ import RxCocoa
 final class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     // MARK: - Private Properties
-    private var videos: [Video]?
     private let bag = DisposeBag()
     fileprivate let cellId = "Cell"
     
@@ -33,8 +32,6 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetVideos()
         
         navigationController?.navigationBar.isTranslucent = false
         
@@ -56,17 +53,10 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
         }
         
         collectionView?.backgroundColor = .white
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         // khoang cach collectionView voi top home
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
-    }
-    
-    private func fetVideos() {
-        ApiService.sharedInstance.fetchVideos { (videos) in
-            self.videos = videos
-            self.collectionView?.reloadData()
-        }
     }
     
     private func setupNavBarButtons() {
@@ -137,33 +127,11 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        let colors: [UIColor] = [.blue, .green, .gray, .purple]
-        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height - 50)
     }
-    
-    //    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    //        return videos?.count ?? 0
-    //    }
-    //
-    //    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    //        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! VideoCell
-    //        cell.video = videos?[indexPath.row]
-    //        return cell
-    //    }
-    //
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    //        return 0
-    //    }
-    //
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        let height = (view.frame.width - 16 - 16) * 9 / 16
-    //        return CGSize(width: view.frame.width, height: height + 16 + 60)
-    //    }
-    //
 }
 
