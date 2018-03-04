@@ -16,6 +16,7 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
     // MARK: - Private Properties
     private let bag = DisposeBag()
     fileprivate let cellId = "Cell"
+    let titles = ["Home", "Trendings", "Subcriptions", "Account"]
     
     lazy private var settingLauncher: SettingsLauncher = {
         let laucher = SettingsLauncher()
@@ -80,6 +81,7 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: [], animated: true)
+        seTitleForIndex(menuIndex)
     }
     
     private func setupMenuBar() {
@@ -114,11 +116,18 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
     }
     
     // fix scroll menubar thì icon cũng sáng theo
+    fileprivate func seTitleForIndex(_ index: Int) {
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = titles[Int(index)]
+        }
+    }
+    
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let index = targetContentOffset.pointee.x / view.frame.width
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
         
+        seTitleForIndex(Int(index))
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
