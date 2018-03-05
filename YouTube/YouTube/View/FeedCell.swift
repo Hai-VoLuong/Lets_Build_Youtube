@@ -19,7 +19,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         return cv
     }()
     
-    private var videos: [Video]?
+    var videos: [Video]?
     let cellId = "Cell"
     
     override func setupViews() {
@@ -31,7 +31,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         collectionView.register(VideoCell.self, forCellWithReuseIdentifier: cellId)
     }
     
-    private func fetVideos() {
+    func fetVideos() {
         ApiService.sharedInstance.fetchVideos { [weak self] (videos) in
             guard let this = self else { return }
             this.videos = videos

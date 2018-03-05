@@ -15,7 +15,10 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
     
     // MARK: - Private Properties
     private let bag = DisposeBag()
-    fileprivate let cellId = "Cell"
+    fileprivate let cellId = "feedCell"
+    fileprivate let trendingCell = "trendingCell"
+    fileprivate let subscriptionCell = "subscriptionCell"
+    
     let titles = ["Home", "Trendings", "Subcriptions", "Account"]
     
     lazy private var settingLauncher: SettingsLauncher = {
@@ -55,6 +58,8 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
         
         collectionView?.backgroundColor = .white
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCell)
+        collectionView?.register(SubcriptionCell.self, forCellWithReuseIdentifier: subscriptionCell)
         // khoang cach collectionView voi top home
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
@@ -135,7 +140,17 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        
+        let identifier : String
+        
+        if indexPath.item == 1 {
+            identifier = trendingCell
+        } else if indexPath.item == 2 {
+            identifier = subscriptionCell
+        } else {
+            identifier = cellId
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
         return cell
     }
     
