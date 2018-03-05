@@ -8,16 +8,31 @@
 
 import UIKit
 
-class Video {
-    var thumbnailImageName: String?
-    var title: String?
-    var numberOfViews: NSNumber?
+class Video: NSObject {
+    @objc var thumbnail_image_name: String?
+    @objc var title: String?
+    @objc var number_of_views: NSNumber?
     var uploadDate: NSDate?
+    @objc var duration: NSNumber?
     
-    var channel: Channel?
+    @objc var channel: Channel?
+    
+    override func setValue(_ value: Any?, forKey key: String) {
+        if key == "channel" {
+            self.channel = Channel()
+            self.channel?.setValuesForKeys(value as! [String: AnyObject])
+        } else {
+            super.setValue(value, forKey: key)
+        }
+    }
+    
+    init(dictionary: [String: AnyObject]) {
+        super.init()
+        setValuesForKeys(dictionary)
+    }
 }
 
-class Channel {
-    var name: String?
-    var profileImageName: String?
+class Channel: NSObject {
+    @objc var name: String?
+    @objc var profile_image_name: String?
 }

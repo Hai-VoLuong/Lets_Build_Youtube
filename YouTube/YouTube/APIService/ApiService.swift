@@ -34,31 +34,11 @@ class ApiService {
                 return
             }
             do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                // 27 phut
-                var videos = [Video]()
-                
-                for dictinary in (json as! [[String: AnyObject]]) {
-                    let video = Video()
-                    video.title = dictinary["title"] as? String
-                    video.thumbnailImageName = dictinary["thumbnail_image_name"] as? String
-                    
-                    let channelDictionary = dictinary["channel"] as? [String: AnyObject]
-                    
-                    let channel = Channel()
-                    channel.name = channelDictionary!["name"] as? String
-                    channel.profileImageName = channelDictionary!["profile_image_name"] as?
-                    String
-                    
-                    video.channel = channel
-                    
-                    videos.append(video)
+                if let data = data, let jsonDictionaries = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [[String: AnyObject]] {
+                    DispatchQueue.main.async {
+                        completion(jsonDictionaries.map({ return Video(dictionary: $0)}))
+                    }
                 }
-                DispatchQueue.main.async {
-                    completion(videos)
-                }
-                
-                
             } catch let jsonError {
                 print(jsonError)
             }
