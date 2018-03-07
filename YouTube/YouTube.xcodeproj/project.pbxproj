@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04159735204A2A4000CB2698 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159734204A2A4000CB2698 /* FeedCell.swift */; };
+		0449A8BC204E0A02007E6C0E /* VideoLaucher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A8BB204E0A02007E6C0E /* VideoLaucher.swift */; };
 		045A1C3A202C95B9002F2D6D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1C39202C95B9002F2D6D /* Extensions.swift */; };
 		045A1C3C202CB2D6002F2D6D /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */; };
 		0462EDBF201F7C6C000AFB15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0462EDBE201F7C6C000AFB15 /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		04159734204A2A4000CB2698 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		041FAE1B48E791F498E36857 /* Pods-YouTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.release.xcconfig"; sourceTree = "<group>"; };
+		0449A8BB204E0A02007E6C0E /* VideoLaucher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLaucher.swift; sourceTree = "<group>"; };
 		045A1C39202C95B9002F2D6D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		0462EDBB201F7C6C000AFB15 /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				045A1C39202C95B9002F2D6D /* Extensions.swift */,
+				0449A8BB204E0A02007E6C0E /* VideoLaucher.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				045A1C3A202C95B9002F2D6D /* Extensions.swift in Sources */,
 				04159735204A2A4000CB2698 /* FeedCell.swift in Sources */,
 				0493725C202D1DA700F1C423 /* BaseCell.swift in Sources */,
+				0449A8BC204E0A02007E6C0E /* VideoLaucher.swift in Sources */,
 				0462EDBF201F7C6C000AFB15 /* AppDelegate.swift in Sources */,
 				047F85172048614500BCC0B0 /* ApiService.swift in Sources */,
 				04846A8B204C4EBA00268383 /* TrendingCell.swift in Sources */,
