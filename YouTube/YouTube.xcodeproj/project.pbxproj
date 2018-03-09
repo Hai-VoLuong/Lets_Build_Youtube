@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		04159735204A2A4000CB2698 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159734204A2A4000CB2698 /* FeedCell.swift */; };
+		042CFE89205205F8005355FA /* FeaturedAppsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CFE87205205F8005355FA /* FeaturedAppsController.swift */; };
+		042CFE8A205205F8005355FA /* FeaturedAppsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CFE88205205F8005355FA /* FeaturedAppsController.xib */; };
 		0449A8BC204E0A02007E6C0E /* VideoLaucher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449A8BB204E0A02007E6C0E /* VideoLaucher.swift */; };
 		045A1C3A202C95B9002F2D6D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1C39202C95B9002F2D6D /* Extensions.swift */; };
 		045A1C3C202CB2D6002F2D6D /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		04159734204A2A4000CB2698 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		041FAE1B48E791F498E36857 /* Pods-YouTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouTube/Pods-YouTube.release.xcconfig"; sourceTree = "<group>"; };
+		042CFE87205205F8005355FA /* FeaturedAppsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedAppsController.swift; sourceTree = "<group>"; };
+		042CFE88205205F8005355FA /* FeaturedAppsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeaturedAppsController.xib; sourceTree = "<group>"; };
 		0449A8BB204E0A02007E6C0E /* VideoLaucher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLaucher.swift; sourceTree = "<group>"; };
 		045A1C39202C95B9002F2D6D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
@@ -64,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042CFE86205205C2005355FA /* AppStore */ = {
+			isa = PBXGroup;
+			children = (
+				042CFE87205205F8005355FA /* FeaturedAppsController.swift */,
+				042CFE88205205F8005355FA /* FeaturedAppsController.xib */,
+			);
+			path = AppStore;
+			sourceTree = "<group>";
+		};
 		0462EDB2201F7C6C000AFB15 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +154,7 @@
 		04EF7E6E2023E0D10073D14B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				042CFE86205205C2005355FA /* AppStore */,
 				0462EDC0201F7C6C000AFB15 /* HomeController.swift */,
 				045A1C3B202CB2D6002F2D6D /* SettingsLauncher.swift */,
 			);
@@ -229,6 +243,7 @@
 				0462EDC9201F7C6C000AFB15 /* LaunchScreen.storyboard in Resources */,
 				0462EDC6201F7C6C000AFB15 /* Assets.xcassets in Resources */,
 				0462EDC4201F7C6C000AFB15 /* Main.storyboard in Resources */,
+				042CFE8A205205F8005355FA /* FeaturedAppsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +324,7 @@
 				04846A8B204C4EBA00268383 /* TrendingCell.swift in Sources */,
 				04EF7E722023E2E00073D14B /* MenuBar.swift in Sources */,
 				04EF7E6D2023E0960073D14B /* VideoCell.swift in Sources */,
+				042CFE89205205F8005355FA /* FeaturedAppsController.swift in Sources */,
 				0468F6B5204C559F005D1E83 /* SubcriptionCell.swift in Sources */,
 				04C809042026893C000FF503 /* Video.swift in Sources */,
 			);
