@@ -113,7 +113,8 @@ final class HomeController: UICollectionViewController, UICollectionViewDelegate
         
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        navigationController?.pushViewController(dummySettingViewController, animated: true)
+        let featureAppController = FeaturedAppsController()
+        navigationController?.pushViewController(featureAppController, animated: true)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
