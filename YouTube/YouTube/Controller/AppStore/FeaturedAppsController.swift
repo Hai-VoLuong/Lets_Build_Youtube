@@ -13,12 +13,17 @@ final class FeaturedAppsController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private let cellId = "Cell"
-    var appCategories: [AppCetegory]?
+    var appCategories: [AppCategory]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        appCategories = AppCetegory.sampleAppCategories()
+        AppCategory.fetchFeatureApps { [weak self] (categories) in
+            guard let this = self else { return }
+            print(categories)
+            this.appCategories = categories
+            this.collectionView.reloadData()
+        }
+        //appCategories = AppCategory.sampleAppCategories()
         
         collectionView.backgroundColor = .white
         collectionView.delegate = self

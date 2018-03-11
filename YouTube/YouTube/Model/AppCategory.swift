@@ -8,35 +8,58 @@
 
 import Foundation
 
-class AppCetegory {
+class AppStore: Decodable {
+    var categories: [AppCategory]?
+}
+
+class AppCategory: Decodable {
     var name: String?
+    var type: String?
     var apps: [App]?
     
-    static func sampleAppCategories() -> [AppCetegory] {
-        let bestNewAppsCategory = AppCetegory()
+    static func fetchFeatureApps(completion: @escaping ([AppCategory]) -> ()) {
+        let urlString = "https://api.letsbuildthatapp.com/appstore/featured"
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            do {
+                let appStore = try JSONDecoder().decode(AppStore.self, from: data)
+                DispatchQueue.main.async {
+                    completion(appStore.categories!)
+                }
+            } catch let err {
+                print("error serializing json, \(err.localizedDescription)")
+            }
+            }.resume()
+    }
+    
+    static func sampleAppCategories() -> [AppCategory] {
+        let bestNewAppsCategory = AppCategory()
         bestNewAppsCategory.name = "Best New Apps"
         
         var apps = [App]()
         
         let fronzenApp = App()
-        fronzenApp.name = "Disney Build It: Fronzen"
-        fronzenApp.imageName = "fronze"
-        fronzenApp.category = "Entertaiment"
-        fronzenApp.price = 3.99
+        fronzenApp.Name = "Disney Build It: Fronzen"
+        fronzenApp.ImageName = "fronze"
+        fronzenApp.Category = "Entertaiment"
+        fronzenApp.Price = 3.99
         apps.append(fronzenApp)
         bestNewAppsCategory.apps = apps
         
         
-        let bestNewGamesCategory = AppCetegory()
+        let bestNewGamesCategory = AppCategory()
         bestNewGamesCategory.name = "Best New Games"
         
         var bestNewGameApps = [App]()
         
         let telepaintApp = App()
-        telepaintApp.name = "Telepaint"
-        telepaintApp.category = "Games"
-        telepaintApp.imageName = "kanye_profile"
-        telepaintApp.price = 2.99
+        telepaintApp.Name = "Telepaint"
+        telepaintApp.Category = "Games"
+        telepaintApp.ImageName = "kanye_profile"
+        telepaintApp.Price = 2.99
         bestNewGameApps.append(telepaintApp)
         bestNewGamesCategory.apps = bestNewGameApps
         
@@ -44,10 +67,10 @@ class AppCetegory {
     }
 }
 
-class App {
-    var id: Int?
-    var name: String?
-    var category: String?
-    var imageName: String?
-    var price: Double?
+class App: Decodable {
+    var Id: Int?
+    var Name: String?
+    var Category: String?
+    var ImageName: String?
+    var Price: Double?
 }

@@ -11,7 +11,7 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     private let cellId = "cell"
-    var appCategory: AppCetegory? {
+    var appCategory: AppCategory? {
         didSet {
             if let name = appCategory?.name {
                 nameLabel.text = name
@@ -62,7 +62,7 @@ class CategoryCell: UICollectionViewCell {
         appCollectionView.delegate = self
         appCollectionView.register(AppCell.self, forCellWithReuseIdentifier: cellId)
         
-        nameLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 14, bottomConstant: 0, rightConstant: 0, widthConstant: 130, heightConstant: 30)
+        nameLabel.anchor(topAnchor, left: leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 14, bottomConstant: 0, rightConstant: 0, widthConstant: 230, heightConstant: 30)
         
         dividerLineView.anchor(nameLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, topConstant: 0, leftConstant: 14, bottomConstant: 0, rightConstant: 14, widthConstant: 0, heightConstant: 0.5)
         
