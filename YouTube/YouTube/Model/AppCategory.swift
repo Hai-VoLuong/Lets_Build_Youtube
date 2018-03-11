@@ -35,7 +35,7 @@ class AppCetegory {
         let telepaintApp = App()
         telepaintApp.name = "Telepaint"
         telepaintApp.category = "Games"
-        telepaintApp.imageName = "Telepaint"
+        telepaintApp.imageName = "kanye_profile"
         telepaintApp.price = 2.99
         bestNewGameApps.append(telepaintApp)
         bestNewGamesCategory.apps = bestNewGameApps
@@ -45,9 +45,9 @@ class AppCetegory {
 }
 
 class App {
-    var id: NSNumber?
+    var id: Int?
     var name: String?
     var category: String?
     var imageName: String?
-    var price: NSNumber?
+    var price: Double?
 }

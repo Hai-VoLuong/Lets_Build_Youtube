@@ -74,11 +74,15 @@ class CategoryCell: UICollectionViewCell {
 extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        if let count = appCategory?.apps?.count {
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = appCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = appCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppCell
+        cell.app = appCategory?.apps![indexPath.item]
         return cell
     }
     
