@@ -13,9 +13,13 @@ final class FeaturedAppsController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private let cellId = "Cell"
+    var appCategories: [AppCetegory]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        appCategories = AppCetegory.sampleAppCategories()
+        
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -27,7 +31,10 @@ final class FeaturedAppsController: UIViewController {
 extension FeaturedAppsController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        if let count = appCategories?.count {
+            return count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
