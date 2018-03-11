@@ -28,7 +28,7 @@ class AppCetegory {
         
         
         let bestNewGamesCategory = AppCetegory()
-        bestNewAppsCategory.name = "Best New Games"
+        bestNewGamesCategory.name = "Best New Games"
         
         var bestNewGameApps = [App]()
         
@@ -40,7 +40,7 @@ class AppCetegory {
         bestNewGameApps.append(telepaintApp)
         bestNewGamesCategory.apps = bestNewGameApps
         
-        return [bestNewAppsCategory, bestNewAppsCategory]
+        return [bestNewAppsCategory, bestNewGamesCategory]
     }
 }
 
