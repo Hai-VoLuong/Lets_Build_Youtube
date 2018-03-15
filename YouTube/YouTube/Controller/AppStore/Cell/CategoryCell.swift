@@ -11,11 +11,13 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     private let cellId = "cell"
+    
     var appCategory: AppCategory? {
         didSet {
             if let name = appCategory?.name {
                 nameLabel.text = name
             }
+            appCollectionView.reloadData()
         }
     }
     
@@ -82,7 +84,7 @@ extension CategoryCell: UICollectionViewDataSource, UICollectionViewDelegate, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = appCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppCell
-        cell.app = appCategory?.apps![indexPath.item]
+        cell.app = appCategory?.apps?[indexPath.item]
         return cell
     }
     

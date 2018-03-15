@@ -17,7 +17,7 @@ class AppCategory: Decodable {
     var type: String?
     var apps: [App]?
     
-    static func fetchFeatureApps(completion: @escaping ([AppCategory]) -> ()) {
+    static func fetchFeatureApps(completion: @escaping (AppStore) -> ()) {
         let urlString = "https://api.letsbuildthatapp.com/appstore/featured"
         
         guard let url = URL(string: urlString) else { return }
@@ -27,7 +27,7 @@ class AppCategory: Decodable {
             do {
                 let appStore = try JSONDecoder().decode(AppStore.self, from: data)
                 DispatchQueue.main.async {
-                    completion(appStore.categories!)
+                    completion(appStore)
                 }
             } catch let err {
                 print("error serializing json, \(err.localizedDescription)")

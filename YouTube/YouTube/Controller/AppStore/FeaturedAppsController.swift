@@ -17,10 +17,9 @@ final class FeaturedAppsController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        AppCategory.fetchFeatureApps { [weak self] (categories) in
+        AppCategory.fetchFeatureApps { [weak self] (appStore) in
             guard let this = self else { return }
-            print(categories)
-            this.appCategories = categories
+            this.appCategories = appStore.categories
             this.collectionView.reloadData()
         }
         //appCategories = AppCategory.sampleAppCategories()
